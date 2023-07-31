@@ -1,0 +1,158 @@
+{
+  "name": "@plasmicapp/react-web",
+  "version": "0.2.242",
+  "description": "plasmic library for rendering in the presentational style",
+  "main": "dist/index.cjs.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/react-web.esm.js",
+  "nx": {
+    "targets": {
+      "build": {
+        "inputs": [
+          "{projectRoot}/**/*",
+          "!{projectRoot}/**/dist/**/*",
+          "!{projectRoot}/lib/**/*"
+        ],
+        "outputs": [
+          "{projectRoot}/**/dist/**/*",
+          "{projectRoot}/lib/**/*"
+        ]
+      }
+    }
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/react-web.esm.js",
+      "require": "./dist/index.cjs.js"
+    },
+    "./lib/host": {
+      "types": "./lib/host/index.d.ts",
+      "import": "./lib/host/index.js",
+      "require": "./lib/host/index.cjs.js"
+    },
+    "./lib/data-sources": {
+      "types": "./lib/data-sources/index.d.ts",
+      "import": "./lib/data-sources/index.js",
+      "require": "./lib/data-sources/index.cjs.js"
+    },
+    "./lib/query": {
+      "types": "./lib/query/index.d.ts",
+      "import": "./lib/query/index.js",
+      "require": "./lib/query/index.cjs.js"
+    },
+    "./lib/prepass": {
+      "types": "./lib/prepass/index.d.ts",
+      "import": "./lib/prepass/index.js",
+      "require": "./lib/prepass/index.cjs.js"
+    },
+    "./lib/plasmic.css": "./lib/plasmic.css",
+    "./lib/auth": {
+      "types": "./lib/auth/index.d.ts",
+      "import": "./lib/auth/index.js",
+      "require": "./lib/auth/index.cjs.js"
+    },
+    "./skinny": {
+      "import": "./skinny/dist/index.js"
+    },
+    "./skinny/dist/plume/*": {
+      "import": "./skinny/dist/plume/*/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "lib",
+    "skinny"
+  ],
+  "scripts": {
+    "build": "rollup -c && mkdir -p lib && cp src/styles/plasmic.css lib/",
+    "clean": "rm -rf dist/ skinny/dist/ lib/host/*js lib/host/*.ts lib/host/*.map lib/data-sources/*js lib/data-sources/*.ts lib/data-sources/*.map lib/query/*js lib/query/*.ts lib/query/*.map lib/auth/*js lib/auth/*.ts lib/auth/*.map",
+    "start": "tsdx watch",
+    "test": "yarn --cwd=../.. test",
+    "lint": "tsdx lint",
+    "upgrade-aria": "yarn upgrade --latest --scope @react-aria && yarn upgrade --latest --scope @react-stately && yarn upgrade --latest --scope @react-types",
+    "prepare": "if-env PREPARE_NO_BUILD=true || yarn build",
+    "size": "size-limit",
+    "analyze": "size-limit --why",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "test-storybook": "test-storybook"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {},
+  "dependencies": {
+    "@plasmicapp/auth-react": "0.0.6",
+    "@plasmicapp/data-sources": "0.1.100",
+    "@plasmicapp/data-sources-context": "0.1.11",
+    "@plasmicapp/host": "1.0.155",
+    "@plasmicapp/prepass": "1.0.1",
+    "@plasmicapp/query": "0.1.67",
+    "@react-aria/checkbox": "^3.5.0",
+    "@react-aria/focus": "^3.7.0",
+    "@react-aria/interactions": "^3.10.0",
+    "@react-aria/listbox": "^3.6.0",
+    "@react-aria/menu": "^3.6.0",
+    "@react-aria/overlays": "^3.10.0",
+    "@react-aria/select": "^3.8.0",
+    "@react-aria/separator": "^3.2.2",
+    "@react-aria/ssr": "^3.3.0",
+    "@react-aria/switch": "^3.2.2",
+    "@react-aria/visually-hidden": "^3.4.0",
+    "@react-stately/collections": "^3.4.2",
+    "@react-stately/list": "^3.5.2",
+    "@react-stately/menu": "^3.4.0",
+    "@react-stately/overlays": "^3.4.0",
+    "@react-stately/select": "^3.3.0",
+    "@react-stately/toggle": "^3.4.0",
+    "@react-stately/tree": "^3.3.2",
+    "classnames": "^2.2.6",
+    "clone": "^2.1.2",
+    "dlv": "^1.1.3",
+    "fast-deep-equal": "^3.1.3",
+    "valtio": "^1.6.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@react-types/overlays": "^3.5.5",
+    "@react-types/select": "^3.5.5",
+    "@react-types/shared": "^3.12.0",
+    "@rollup/plugin-commonjs": "^25.0.2",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@size-limit/preset-small-lib": "^4.10.2",
+    "@storybook/addon-actions": "^6.3.4",
+    "@storybook/addon-essentials": "^6.3.4",
+    "@storybook/addon-interactions": "^6.5.9",
+    "@storybook/addon-links": "^6.3.4",
+    "@storybook/jest": "^0.0.10",
+    "@storybook/react": "^6.5.9",
+    "@storybook/test-runner": "^0.5.0",
+    "@storybook/testing-library": "^0.0.13",
+    "@types/classnames": "^2.2.9",
+    "@types/clone": "^2.1.1",
+    "@types/dlv": "^1.1.2",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "babel-jest": "^27.0.6",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.26.0",
+    "eslint-plugin-valtio": "^0.5.1",
+    "husky": "^6.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^3.26.1",
+    "rollup-plugin-dts": "^5.3.0",
+    "rollup-plugin-typescript2": "^0.35.0",
+    "size-limit": "^4.10.2",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.3.1"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  }
+}

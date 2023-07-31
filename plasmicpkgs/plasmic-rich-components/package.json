@@ -1,0 +1,65 @@
+{
+  "name": "@plasmicpkgs/plasmic-rich-components",
+  "version": "1.0.110",
+  "description": "Rich batteries-included general purpose components for business apps, admin panels, etc.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/plasmic-rich-components.esm.js",
+  "files": [
+    "dist"
+  ],
+  "size-limit": [
+    {
+      "path": "dist/plasmic-rich-components.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/plasmic-rich-components.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "scripts": {
+    "build": "rollup -c rollup.config.mjs && yarn tsc --emitDeclarationOnly --declaration src/index.tsx --incremental --tsBuildInfoFile ./dist/.tsbuildinfo  --skipLibCheck --jsx react --esModuleInterop --strict --outDir ./dist/",
+    "start": "tsdx watch",
+    "test": "yarn --cwd=../.. test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "if-env PREPARE_NO_BUILD=true || yarn build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "devDependencies": {
+    "@ant-design/icons": "^5.0.1",
+    "@ant-design/pro-components": "^2.4.1",
+    "@plasmicapp/data-sources": "0.1.100",
+    "@plasmicapp/host": "1.0.155",
+    "@rollup/plugin-commonjs": "^25.0.2",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@size-limit/preset-small-lib": "^4.11.0",
+    "@types/node": "^14.0.26",
+    "antd": "^5.4.0",
+    "rollup": "^3.26.2",
+    "size-limit": "^4.11.0",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.2.0",
+    "typescript": "^4"
+  },
+  "peerDependencies": {
+    "@ant-design/icons": ">=5.0.0",
+    "@ant-design/pro-components": ">=2.4.1",
+    "@plasmicapp/data-sources": ">=0.1.52",
+    "@plasmicapp/host": ">=1.0.0",
+    "antd": ">=5.0.0",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "csv-writer-browser": "^1.0.0",
+    "fast-stringify": "^2.0.0",
+    "lodash": "^4.17.21",
+    "tinycolor2": "^1.6.0"
+  }
+}
